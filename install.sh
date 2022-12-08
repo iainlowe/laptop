@@ -100,12 +100,12 @@ install_homebrew
 
 # Install base Brewfile bundle from GitHub
 ohai "Installing Brewfile.base..."
-brew bundle --file=https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.base
+curl -fsSL https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.base | brew bundle install -v --file=- 
 
 # Install Brewfile for this host from Github if one exists
 if curl --output /dev/null --silent --head --fail "https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.${HOSTNAME}"; then
   ohai "Installing Brewfile.${HOSTNAME}..."
-  brew bundle --file=https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.${HOSTNAME}
+  curl -fsSL https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.${HOSTNAME} | brew bundle install -v --file=-
 else
   warn "No Brewfile.${HOSTNAME} found"
 fi

@@ -8,7 +8,6 @@ tap "microsoft/git"
 
 brew "python@3.10"
 brew "borgbackup"
-brew "dex2jar"
 brew "docker"
 brew "exiftool"
 brew "unbound"
@@ -37,21 +36,26 @@ cask "visual-studio-code"
 cask "hazel"
 cask "notion"
 cask "backblaze"
+cask "hedge"
+cask "microsoft-office"
+cask "ableton-live-lite"
+cask "balenaetcher"
 
-mas "Avalanche Unlimited", id: 1479552484
+
+mas "1Password for Safari", id: 1569813296
 mas "BlockheadsServer", id: 662633568
-mas "Disk Speed Test", id: 425264550
 mas "everyday", id: 1394150432
 mas "Final Cut Pro", id: 424389933
 mas "Git Streaks", id: 1525795950
 mas "Kindle", id: 405399194
 mas "NordVPN", id: 905953485
 mas "Notion Web Clipper", id: 1559269364
+mas "OneTab", id: 1540160809
 mas "Save to Raindrop.io", id: 1549370672
 mas "ServerCat", id: 1501532023
+mas "Slack", id: 803453959
 mas "Streaks", id: 963034692
 mas "Super Agent", id: 1568262835
-mas "Termius", id: 1176074088
+mas "Things", id: 904280696
 mas "Ulysses", id: 1225570693
-mas "Video Editor Movavi", id: 1388868440
 mas "Xcode", id: 497799835

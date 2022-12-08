@@ -30,7 +30,6 @@ brew "iainlowe/tap/ilowe-test"
 
 cask "1password-cli"
 cask "git-credential-manager-core"
-cask "jd-gui"
 cask "syncthing"
 cask "visual-studio-code"
 cask "hazel"

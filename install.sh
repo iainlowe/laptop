@@ -1,21 +1,5 @@
 #!/bin/zsh
 
-readonly TAPS=(iainlowe/tap goreleaser/tap 1password/tap)
-readonly PKGS=(go goreleaser 1password-cli mas visual-studio-code hub nmap wget)# hazel notion)
-
-# whalebrew allows you to package docker commands as local commands
-
-declare -A APPS
-
-APPS[Kindle]=405399194
-APPS["1Password for Safari"]=1569813296
-APPS[Ulysses]=1225570693
-APPS[Things]=904280696
-APPS["Save to Raindrop.io"]=1549370672
-APPS["Notion Web Clipper"]=1559269364
-APPS[OneTab]=1540160809
-APPS[Slack]=803453959
-
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -62,6 +46,25 @@ warn() {
   printf "${tty_red}Warning${tty_reset}: %s\n" "$(chomp "$1")"
 }
 
+readonly HOSTNAME=$(scutil --get LocalHostName)
+
+# Install private SSH keys from GitHub
+# mkdir -p ~/.ssh
+# curl -s https://raw.githubusercontent.com/iainlowe/laptop/main/ssh/id_rsa > ~/.ssh/id_rsa
+# curl -s https://raw.githubusercontent.com/iainlowe/laptop/main/ssh/id_rsa.pub > ~/.ssh/id_rsa.pub
+# chmod 600 ~/.ssh/id_rsa
+# chmod 644 ~/.ssh/id_rsa.pub
+
+# Install private GPG keys from GitHub
+# mkdir -p ~/.gnupg
+# curl -s https://raw.githubusercontent.com/iainlowe/laptop/main/gpg/private.key > ~/.gnupg/private.key
+# curl -s https://raw.githubusercontent.com/iainlowe/laptop/main/gpg/public.key > ~/.gnupg/public.key
+# chmod 600 ~/.gnupg/private.key
+# chmod 644 ~/.gnupg/public.key
+
+
+# whalebrew allows you to package docker commands as local commands
+
 check() {
   which "$@" >/dev/null
 }
@@ -95,26 +98,17 @@ install_xcode_tools
 install_rosetta
 install_homebrew
 
-ohai "Adding extra taps..."
-for tap in ${TAPS}; do
-  brew tap ${tap}
-done
+# Install base Brewfile bundle from GitHub
+ohai "Installing Brewfile.base..."
+brew bundle --file=https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.base
 
-ohai "Updating brew..."
-brew update
-
-ohai "Installing casks/formulae..."
-for pkg in ${PKGS}; do
-  brew list | grep ${pkg} >/dev/null || brew install ${pkg}
-done
-
-ohai "Upgrading existing casks/formulae..."
-brew upgrade
-
-ohai "Installing App Store applications..."
-for app in ${(k)APPS}; do
-    mas install ${APPS[$app]}
-done
+# Install Brewfile for this host from Github if one exists
+if curl --output /dev/null --silent --head --fail "https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.${HOSTNAME}"; then
+  ohai "Installing Brewfile.${HOSTNAME}..."
+  brew bundle --file=https://raw.githubusercontent.com/iainlowe/laptop/main/Brewfile.${HOSTNAME}
+else
+  warn "No Brewfile.${HOSTNAME} found"
+fi
 
 # Install VS Code extensions
 : code --list-extensions

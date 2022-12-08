@@ -1,0 +1,23 @@
+tap "1password/tap"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "microsoft/git"
+
+brew "python@3.10"
+brew "gnupg"
+brew "go"
+brew "hub"
+brew "mas"
+brew "mosh"
+brew "jq"
+brew "wget"
+
+cask "1password-cli"
+cask "git-credential-manager-core"
+cask "visual-studio-code"
+
+mas "1Password for Safari", id: 1569813296
+mas "OneTab", id: 1540160809
+mas "Things", id: 904280696
+mas "Slack", id: 803453959

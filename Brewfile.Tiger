@@ -39,6 +39,9 @@ cask "hedge"
 cask "microsoft-office"
 cask "ableton-live-lite"
 cask "balenaetcher"
+cask "steam"
+cask "battle-net"
+cask "resilio-sync"
 
 
 mas "1Password for Safari", id: 1569813296
